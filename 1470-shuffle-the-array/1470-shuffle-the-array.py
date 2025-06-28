@@ -5,9 +5,8 @@ class Solution(object):
         :type n: int
         :rtype: List[int]
         """
-        first_half = nums[:n]
-        #second_half = nums
-        for i in range(1,len(nums),2):
-            first_half.insert(i,nums[n])
-            n += 1
-        return first_half
+        ans = []
+        for i in range(len(nums)//2):
+            ans.append(nums[i])
+            ans.append(nums[i+n])
+        return ans
