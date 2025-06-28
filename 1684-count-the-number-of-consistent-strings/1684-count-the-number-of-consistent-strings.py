@@ -6,7 +6,8 @@ class Solution(object):
         :rtype: int
         """
         count = 0
-        for i in range(len(words)):
+        n = range(len(words))
+        for i in n:
             if set(words[i]).issubset(set(allowed)):
                 count+=1
 
