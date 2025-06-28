@@ -6,7 +6,7 @@ class Solution(object):
         """
         count = 0
         for i in range(len(operations)):
-            if "-" in operations[i]:
+            if operations[i] == "--X" or operations[i] == "X--" :
                 count -=1
             else:
                 count +=1
