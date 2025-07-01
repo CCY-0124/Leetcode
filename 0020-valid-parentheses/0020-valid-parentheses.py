@@ -15,7 +15,7 @@ class Solution(object):
                 stack.append("]")
         
             else:
-                if i != stack[-1] or not stack:
+                if not stack or i != stack[-1]:
                     return False
                 else:
                     stack.pop()
