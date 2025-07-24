@@ -6,30 +6,42 @@ class Solution(object):
         :type y: int
         :rtype: int
         """
-        word = 'ab'
 
         if x > y:
-            n = 1
             first, second = x, y
+            n = 1
+            string = 'ab'
+            
         else:
-            n = -1
             second, first = x, y
-
-        s = ''.join(list(s)[::n])
+            n = 1
+            string = 'ba'
 
         ans = 0
+        stack = []
+        print(s[::n])
 
-        while word in s:
-            index = s.find(word)
-
-            if index != -1:
+        for word in s[::n]:
+            if stack and stack[-1] == string[0] and word == string[1]:
+                stack.pop()
+                
                 ans += first
-            s = s[:index]+s[index+2:]
+                print(ans)
 
-        while word[::-1] in s:
-            index = s.find(word[::-1])
-            if index != -1:
+            else:
+                stack.append(word)
+        
+        remain = "".join(stack)
+        print(remain)
+        stack = []
+
+        for word in remain[::n]:
+            if stack and stack[-1] == string[1] and word == string[0]:
+                stack.pop()
                 ans += second
-            s = s[:index]+s[index+2:]
+                print(ans)
+
+            else:
+                stack.append(word)
 
         return ans
