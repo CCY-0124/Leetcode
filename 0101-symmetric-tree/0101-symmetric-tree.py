@@ -10,33 +10,22 @@ class Solution(object):
         :type root: Optional[TreeNode]
         :rtype: bool
         """
-        queue = collections.deque([root])
+        if not root:
+            return True
+        return self.compare(root.left, root.right)
 
-        while queue:
-            level = []
-            for _ in range(len(queue)):
-                cur = queue.popleft()
-                if cur:
-                    level.append(cur.val)
-
-                    if cur.left:
-                        queue.append(cur.left)
-                    else:
-                        queue.append(None)
-                    if cur.right:
-                        queue.append(cur.right)
-                    else:
-                        queue.append(None)
-                        
-                else:
-                    level.append(None)
-
-            size = len(level)
-
-            if level == level[::-1]:
-                continue
-            else:
-                return False
+    def compare(self, left, right):
+        if left == None and right != None:
+            return False
+        elif left != None and right == None:
+            return False
+        elif left == None and right == None:
+            return True
         
-        return True
-            
+        elif left.val != right.val:
+            return False
+
+        outside = self.compare(left.left, right.right)
+        inside = self.compare(left.right, right.left)
+        same = outside and inside
+        return same
