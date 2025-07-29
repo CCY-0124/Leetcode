@@ -7,18 +7,24 @@ class Solution(object):
         """
         tank_max = []
         for i in range(len(gas)):
-            if i+1 >= len(gas):
-                tank_max.append(gas[i]-cost[i]+gas[i+1-len(gas)])
-            else:
-                tank_max.append(gas[i]-cost[i]+gas[i+1])
+                tank_max.append(gas[i]-cost[i])
+
+        if sum(tank_max) < 0:
+            return -1
 
         print(tank_max)
+        print(sum(tank_max))
 
-        if min(tank_max) < 0:
-            return -1
+        start = 0
+        tank = 0
+        total = 0
 
-        elif tank_max.count(max(tank_max)) > 1:
-            return -1
+        for i in range(len(tank_max)):
+            tank += tank_max[i]
+            total += tank_max[i]
 
-        elif tank_max.count(max(tank_max)) == 1:
-            return tank_max.index(max(tank_max))
+            if tank < 0:
+                start = i + 1
+                tank = 0
+
+        return start if total >= 0 else -1
